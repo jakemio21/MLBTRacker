@@ -306,6 +306,83 @@ footer{
   color:var(--muted);font-size:15px;
   border:1px solid var(--border);border-radius:16px;
 }
+
+/* ── ALGORITHM PAGE ── */
+.algo-formula-card{
+  background:linear-gradient(135deg,#0d1629,#0c1525);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;padding:32px 40px;
+  margin-bottom:32px;text-align:center;
+}
+.formula-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:20px;
+}
+.algo-formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px}
+.f-part{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:800;padding:10px 22px;border-radius:12px;
+}
+.f-part.hit{background:rgba(77,138,245,0.12);color:#4d8af5;border:1px solid rgba(77,138,245,0.22)}
+.f-part.sp {background:rgba(0,212,126,0.10);color:#00d47e;border:1px solid rgba(0,212,126,0.18)}
+.f-part.rp {background:rgba(168,85,247,0.10);color:#a855f7;border:1px solid rgba(168,85,247,0.18)}
+.f-part.rec{background:rgba(245,165,35,0.10);color:var(--gold);border:1px solid rgba(245,165,35,0.2)}
+.f-plus{color:var(--muted);font-size:22px}
+
+.algo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+@media(max-width:960px){.algo-grid{grid-template-columns:repeat(2,1fr)}}
+.algo-card{
+  background:var(--card);border-radius:20px;padding:26px 22px;
+  border:1px solid var(--border);transition:transform .2s;
+}
+.algo-card:hover{transform:translateY(-3px)}
+.algo-card.hit{border-color:rgba(77,138,245,0.22)}
+.algo-card.sp {border-color:rgba(0,212,126,0.18)}
+.algo-card.rp {border-color:rgba(168,85,247,0.18)}
+.algo-card.rec{border-color:rgba(245,165,35,0.22)}
+.algo-weight{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:52px;font-weight:900;line-height:1;margin-bottom:4px;
+}
+.algo-card.hit .algo-weight{color:#4d8af5}
+.algo-card.sp  .algo-weight{color:#00d47e}
+.algo-card.rp  .algo-weight{color:#a855f7}
+.algo-card.rec .algo-weight{color:var(--gold)}
+.algo-card-title{
+  font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;color:var(--text);
+  margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+.algo-sub{font-size:12px;color:var(--dim);line-height:2}
+.algo-sub b{color:var(--text);font-weight:600}
+.algo-sub .sub-indent{padding-left:10px;color:var(--muted)}
+
+.score-tables{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px}
+.score-tables-2{grid-template-columns:repeat(2,1fr);max-width:720px}
+@media(max-width:900px){.score-tables,.score-tables-2{grid-template-columns:1fr}}
+.stc{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.st-hd{
+  padding:13px 18px;
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  background:rgba(255,255,255,0.025);border-bottom:1px solid var(--border);
+}
+.st-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 18px;border-bottom:1px solid rgba(255,255,255,0.025);
+}
+.st-row:last-child{border-bottom:none}
+.st-val{color:var(--dim);font-size:12px}
+.st-sc{
+  font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:13px;
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+}
+.s1,.s2,.s3{background:rgba(255,71,87,0.15);color:#ff4757}
+.s4,.s5,.s6{background:rgba(245,165,35,0.15);color:var(--gold)}
+.s7,.s8    {background:rgba(77,138,245,0.15);color:var(--blue)}
+.s9,.s10   {background:rgba(0,212,126,0.15);color:var(--green)}
 </style>
 </head>
 <body>
@@ -323,6 +400,7 @@ footer{
 <div class="nav-bar">
   <button class="nav-btn active" onclick="nav('home',this)">&#9918;&nbsp; Today's Picks</button>
   <button class="nav-btn" onclick="nav('results',this)">&#128202;&nbsp; Results Tracker</button>
+  <button class="nav-btn" onclick="nav('algo',this)">&#9881;&#65039;&nbsp; Algorithm</button>
 </div>
 
 <div id="page-home" class="page active">
@@ -343,8 +421,11 @@ footer{
 <div id="page-results" class="page">
   <div class="wrap"><div class="rpage-hd"><div class="rpage-title">Algorithm Performance</div><div class="rpage-sub">Win rate tracked across all confidence tiers</div></div><div class="rc-grid"><div class="rc top"><div class="rc-lbl">&#128293; Top Picks</div><div class="rc-pct">0<span>%</span></div><div class="rc-rec">0W &ndash; 0L</div><div class="rc-bar-bg"><div class="rc-bar top" style="width:0%"></div></div></div><div class="rc strong"><div class="rc-lbl">&#9889; Strong Edges</div><div class="rc-pct">0<span>%</span></div><div class="rc-rec">0W &ndash; 0L</div><div class="rc-bar-bg"><div class="rc-bar strong" style="width:0%"></div></div></div><div class="rc slight"><div class="rc-lbl">&#128202; Slight Edges</div><div class="rc-pct">0<span>%</span></div><div class="rc-rec">0W &ndash; 0L</div><div class="rc-bar-bg"><div class="rc-bar slight" style="width:0%"></div></div></div><div class="rc tossup"><div class="rc-lbl">&#10134; Toss-Ups</div><div class="rc-pct">0<span>%</span></div><div class="rc-rec">0W &ndash; 0L</div><div class="rc-bar-bg"><div class="rc-bar tossup" style="width:0%"></div></div></div></div><div class="rpage-shd">&#128197; Pick History</div><div class="no-hist">No resolved picks yet &#8212; run the model tomorrow to see results.</div></div>
 </div>
+<div id="page-algo" class="page">
+  <div class="wrap"><div class="rpage-hd"><div class="rpage-title">Algorithm Breakdown</div><div class="rpage-sub">Every weight, formula, and scoring table — exactly how the model works</div></div><div class="algo-formula-card"><div class="formula-label">Final Team Score (1&#8211;10)</div><div class="algo-formula"><span class="f-part hit">Hitting &times; 40%</span><span class="f-plus">+</span><span class="f-part sp">Starting Pitching &times; 32%</span><span class="f-plus">+</span><span class="f-part rp">Relief Pitching &times; 18%</span><span class="f-plus">+</span><span class="f-part rec">Win % &times; 10%</span></div></div><div class="algo-grid"><div class="algo-card hit"><div class="algo-weight">40%</div><div class="algo-card-title">Hitting</div><div class="algo-sub"><b>Weighted OPS</b><br><span class="sub-indent">Last 5 Games OPS &bull; 65%</span><br><span class="sub-indent">Season OPS &bull; 35%</span><br><br>Weighted OPS is then converted<br>to a 1&#8211;10 score using the<br>OPS table below</div></div><div class="algo-card sp"><div class="algo-weight">32%</div><div class="algo-card-title">Starting Pitching</div><div class="algo-sub"><b>ERA Score</b> &bull; 40%<br><span class="sub-indent">Season ERA &bull; 60%</span><br><span class="sub-indent">Last 5 Starts ERA &bull; 40%</span><br><br><b>WHIP Score</b> &bull; 40%<br><span class="sub-indent">Season WHIP &bull; 60%</span><br><span class="sub-indent">Last 5 Starts WHIP &bull; 40%</span><br><br><b>Home / Away Split</b> &bull; 20%</div></div><div class="algo-card rp"><div class="algo-weight">18%</div><div class="algo-card-title">Relief Pitching</div><div class="algo-sub"><b>Bullpen ERA</b> &bull; 50%<br><span class="sub-indent">Season ERA &bull; 60%</span><br><span class="sub-indent">Last 5 Games ERA &bull; 40%</span><br><br><b>Bullpen WHIP</b> &bull; 50%<br><span class="sub-indent">Season WHIP &bull; 60%</span><br><span class="sub-indent">Last 5 Games WHIP &bull; 40%</span></div></div><div class="algo-card rec"><div class="algo-weight">10%</div><div class="algo-card-title">Win %</div><div class="algo-sub">Team season win percentage<br>converted to a 1&#8211;10 score.<br><br><b>Below .425</b> &#8594; 1<br><b>.500 &#8211; .524</b> &#8594; 5<br><b>.625 and above</b> &#8594; 10</div></div></div><div class="rpage-shd">&#128202; Scoring Tables &nbsp;&#8212;&nbsp; Red = Poor &nbsp;&bull;&nbsp; Gold = Average &nbsp;&bull;&nbsp; Blue = Good &nbsp;&bull;&nbsp; Green = Elite</div><div class="score-tables"><div class="stc"><div class="st-hd" style="color:#4d8af5">OPS &#8594; Score &nbsp;(Hitting)</div><div class="st-row"><span class="st-val">Below .550</span><span class="st-sc s1">1</span></div><div class="st-row"><span class="st-val">.550 &#8211; .599</span><span class="st-sc s2">2</span></div><div class="st-row"><span class="st-val">.600 &#8211; .649</span><span class="st-sc s3">3</span></div><div class="st-row"><span class="st-val">.650 &#8211; .699</span><span class="st-sc s4">4</span></div><div class="st-row"><span class="st-val">.700 &#8211; .749</span><span class="st-sc s5">5</span></div><div class="st-row"><span class="st-val">.750 &#8211; .799</span><span class="st-sc s6">6</span></div><div class="st-row"><span class="st-val">.800 &#8211; .849</span><span class="st-sc s7">7</span></div><div class="st-row"><span class="st-val">.850 &#8211; .899</span><span class="st-sc s8">8</span></div><div class="st-row"><span class="st-val">.900 &#8211; .949</span><span class="st-sc s9">9</span></div><div class="st-row"><span class="st-val">.950 and above</span><span class="st-sc s10">10</span></div></div><div class="stc"><div class="st-hd" style="color:#00d47e">ERA &#8594; Score &nbsp;(Starting Pitching)</div><div class="st-row"><span class="st-val">Above 5.50</span><span class="st-sc s1">1</span></div><div class="st-row"><span class="st-val">5.01 &#8211; 5.50</span><span class="st-sc s2">2</span></div><div class="st-row"><span class="st-val">4.61 &#8211; 5.00</span><span class="st-sc s3">3</span></div><div class="st-row"><span class="st-val">4.21 &#8211; 4.60</span><span class="st-sc s4">4</span></div><div class="st-row"><span class="st-val">3.81 &#8211; 4.20</span><span class="st-sc s5">5</span></div><div class="st-row"><span class="st-val">3.41 &#8211; 3.80</span><span class="st-sc s6">6</span></div><div class="st-row"><span class="st-val">3.11 &#8211; 3.40</span><span class="st-sc s7">7</span></div><div class="st-row"><span class="st-val">2.81 &#8211; 3.10</span><span class="st-sc s8">8</span></div><div class="st-row"><span class="st-val">2.51 &#8211; 2.80</span><span class="st-sc s9">9</span></div><div class="st-row"><span class="st-val">Below 2.50</span><span class="st-sc s10">10</span></div></div><div class="stc"><div class="st-hd" style="color:#a855f7">ERA &#8594; Score &nbsp;(Relief Pitching)</div><div class="st-row"><span class="st-val">Above 5.20</span><span class="st-sc s1">1</span></div><div class="st-row"><span class="st-val">4.86 &#8211; 5.20</span><span class="st-sc s2">2</span></div><div class="st-row"><span class="st-val">4.51 &#8211; 4.85</span><span class="st-sc s3">3</span></div><div class="st-row"><span class="st-val">4.16 &#8211; 4.50</span><span class="st-sc s4">4</span></div><div class="st-row"><span class="st-val">3.81 &#8211; 4.15</span><span class="st-sc s5">5</span></div><div class="st-row"><span class="st-val">3.51 &#8211; 3.80</span><span class="st-sc s6">6</span></div><div class="st-row"><span class="st-val">3.21 &#8211; 3.50</span><span class="st-sc s7">7</span></div><div class="st-row"><span class="st-val">2.91 &#8211; 3.20</span><span class="st-sc s8">8</span></div><div class="st-row"><span class="st-val">2.61 &#8211; 2.90</span><span class="st-sc s9">9</span></div><div class="st-row"><span class="st-val">Below 2.61</span><span class="st-sc s10">10</span></div></div></div><div class="score-tables score-tables-2"><div class="stc"><div class="st-hd" style="color:#64748b">WHIP &#8594; Score &nbsp;(Starters &amp; Bullpen)</div><div class="st-row"><span class="st-val">Above 1.70</span><span class="st-sc s1">1</span></div><div class="st-row"><span class="st-val">1.61 &#8211; 1.70</span><span class="st-sc s2">2</span></div><div class="st-row"><span class="st-val">1.51 &#8211; 1.60</span><span class="st-sc s3">3</span></div><div class="st-row"><span class="st-val">1.41 &#8211; 1.50</span><span class="st-sc s4">4</span></div><div class="st-row"><span class="st-val">1.31 &#8211; 1.40</span><span class="st-sc s5">5</span></div><div class="st-row"><span class="st-val">1.21 &#8211; 1.30</span><span class="st-sc s6">6</span></div><div class="st-row"><span class="st-val">1.11 &#8211; 1.20</span><span class="st-sc s7">7</span></div><div class="st-row"><span class="st-val">1.01 &#8211; 1.10</span><span class="st-sc s8">8</span></div><div class="st-row"><span class="st-val">0.91 &#8211; 1.00</span><span class="st-sc s9">9</span></div><div class="st-row"><span class="st-val">Below 0.91</span><span class="st-sc s10">10</span></div></div><div class="stc"><div class="st-hd" style="color:#f5a523">Win % &#8594; Score &nbsp;(Team Record)</div><div class="st-row"><span class="st-val">Below .425</span><span class="st-sc s1">1</span></div><div class="st-row"><span class="st-val">.425 &#8211; .450</span><span class="st-sc s2">2</span></div><div class="st-row"><span class="st-val">.451 &#8211; .475</span><span class="st-sc s3">3</span></div><div class="st-row"><span class="st-val">.476 &#8211; .499</span><span class="st-sc s4">4</span></div><div class="st-row"><span class="st-val">.500 &#8211; .524</span><span class="st-sc s5">5</span></div><div class="st-row"><span class="st-val">.525 &#8211; .549</span><span class="st-sc s6">6</span></div><div class="st-row"><span class="st-val">.550 &#8211; .574</span><span class="st-sc s7">7</span></div><div class="st-row"><span class="st-val">.575 &#8211; .599</span><span class="st-sc s8">8</span></div><div class="st-row"><span class="st-val">.600 &#8211; .624</span><span class="st-sc s9">9</span></div><div class="st-row"><span class="st-val">.625 and above</span><span class="st-sc s10">10</span></div></div></div></div>
+</div>
 
-<footer>Generated April 26, 2026 at 08:51 PM&nbsp;&nbsp;&#183;&nbsp;&nbsp;Data via MLB Stats API&nbsp;&nbsp;&#183;&nbsp;&nbsp;For entertainment purposes only</footer>
+<footer>Generated April 26, 2026 at 09:10 PM&nbsp;&nbsp;&#183;&nbsp;&nbsp;Data via MLB Stats API&nbsp;&nbsp;&#183;&nbsp;&nbsp;For entertainment purposes only</footer>
 <script>
 function nav(name,btn){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
