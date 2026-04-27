@@ -1,0 +1,20 @@
+# Generated HTML reports
+mlb_*.html
+
+# API + results cache
+.mlb_model_cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# macOS
+.DS_Store
+
+# Everything else in Downloads — only track project files
+*
+!mlb_matchup_model.py
+!README.md
+!.gitignore
